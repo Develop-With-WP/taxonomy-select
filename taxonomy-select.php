@@ -47,11 +47,6 @@ function taxonomy_select_meta_box_display( $post ) {
           <?php endforeach;
         endif; ?>
       </select>
-      <div class="taxonomy-select-inputs">
-        <input type="text" id="taxonomy-select-input" placeholder="Create Taxonomy">
-        <input type="submit" id="taxonomy-select-submit" value="Add" class="button button-primary button-larger">
-      </div>
-
     </div>
     <?php
 }
@@ -66,23 +61,3 @@ function save_taxomony_select_value( $post_id ) {
     }
 }
 add_action( 'save_post_post', 'save_taxomony_select_value' );
-
-function register_taxonomy_select_js() {
-  wp_enqueue_script(
-    'taxonomy-select-js',
-    plugins_url() . '/taxonomy-select/taxonomy-select.js',
-    array(),
-    '0.0.1',
-    true
-  );
-
-  wp_localize_script(
-		'taxonomy-select-js',
-		'TaxonomySelect',
-		[
-      'baseURL' =>  site_url(),
-      'nonce'   =>  wp_create_nonce( 'wp_rest' )
-    ]
-	);
-}
-add_action( 'admin_enqueue_scripts', 'register_taxonomy_select_js' );
